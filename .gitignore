@@ -1,0 +1,9 @@
+
+Wallpapers NLW
+.vscode
+
+# macOS
+.DS_Store
+
+# dependencies
+**/node_modules
