@@ -20,6 +20,7 @@ interface Point {
     id: number;
     name: string;
     image: string;
+    image_url: string;
     latitude: number;
     longitude: number;
 }
@@ -50,7 +51,6 @@ const Points = () => {
             }
             const location = await Location.getCurrentPositionAsync();
             const { latitude, longitude } = location.coords;
-
             setInitialPosition([
                 latitude,
                 longitude
@@ -128,7 +128,7 @@ const Points = () => {
                                                 longitude: point.longitude
                                             }}>
                                             <View style={styles.mapMarkerContainer}>
-                                                <Image style={styles.mapMarkerImage} source={{ uri: 'https://images.unsplash.com/photo-1591199571558-25db3c59609f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' }}></Image>
+                                                <Image style={styles.mapMarkerImage} source={{ uri: point.image_url }}></Image>
                                                 <Text style={styles.mapMarkerTitle}>{point.name}</Text>
                                             </View>
                                         </Marker>

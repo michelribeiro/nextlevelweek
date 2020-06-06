@@ -7,6 +7,7 @@ import axios from 'axios';
 import { LeafletMouseEvent } from 'leaflet';
 import './styles.css';
 import logo from '../../assets/logo.svg';
+import Dropzone from "../../components/Dropzone";
 
 interface Item {
     id: number;
@@ -36,7 +37,8 @@ const CreatePont = () => {
         name: '',
         email: '',
         whatsapp: ''
-    })
+    });
+    const [selectedFile, setSelectedFile] = useState<File>();
 
     //default
     const history = useHistory();
@@ -106,22 +108,27 @@ const CreatePont = () => {
 
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
+
         const { name, email, whatsapp } = formData;
         const uf = selectedUf;
         const city = selectedCity;
         const [longitude, latitude] = selectedPosition;
         const items = selectedItems;
-        const data = {
-            name,
-            email,
-            whatsapp,
-            uf,
-            city,
-            longitude,
-            latitude,
-            items
-        }
-        console.log(data);
+
+        const data = new FormData();
+            data.append('name', name);
+            data.append('email', email);
+            data.append('whatsapp', whatsapp);
+            data.append('uf', uf);
+            data.append('city', city);
+            data.append('longitude', String(longitude));
+            data.append('latitude', String(latitude));
+            data.append('items', items.join(','));
+
+            if (selectedFile) {
+                data.append('image', selectedFile)
+            }
+
         await api.post('points', data);
         alert('cadastro efetuado!')
         history.push('/');
@@ -138,6 +145,7 @@ const CreatePont = () => {
             </header>
             <form onSubmit={handleSubmit}>
                 <h1>Cadastro do ponto de coleta</h1>
+                <Dropzone onFileUploaded={setSelectedFile} />
                 <fieldset>
                     <legend>
                         <h2>Dados</h2>
