@@ -35,7 +35,7 @@ npm knex:seed
 #### Thanks for
 
 > I have to congratulate @diego3g from Rocketseat. This content was of a very good level and I know that it will take me to the next level of my career.
-
+---
 #### Contact me
 * [E-mail](mailto:michel.ribeiro@michelribeiro.com.br)
 * [Linkedin](https://www.linkedin.com/in/michelribeiro)
